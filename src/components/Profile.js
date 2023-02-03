@@ -2,7 +2,11 @@ import React from 'react';
 
 class Profile extends React.Component {
   render() {
-    return (<p>Album</p>);
+    return (
+      <div data-testid="page-profile">
+        Profile
+      </div>
+    );
   }
 }
 

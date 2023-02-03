@@ -2,7 +2,11 @@ import React from 'react';
 
 class Search extends React.Component {
   render() {
-    return (<p>Componente Search</p>);
+    return (
+      <div data-testid="page-search">
+        Search
+      </div>
+    );
   }
 }
 
