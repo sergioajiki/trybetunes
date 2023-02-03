@@ -12,10 +12,7 @@ class Login extends React.Component {
     const { name, value } = target;
     this.setState({
       [name]: value,
-    });
-    this.setState({
-      isLogButtonDisabled: this.validateButtonLogin(),
-    });
+    }, () => this.validateButtonLogin());
 
     // const minLength = 3;
     // const validButton = value.length < minLength;
@@ -25,11 +22,11 @@ class Login extends React.Component {
 
   validateButtonLogin = () => {
     const { name } = this.state;
-    console.log(name);
+    // console.log(name);
     const minLength = 3;
-    const validButton = name.length <= minLength;
+    const validButton = name.length < minLength;
     return validButton;
-    // this.setState({ isLogButtonDisabled: validButton });
+    // return this.setState({ isLogButtonDisabled: validButton });
     // console.log(value.length);
     // console.log(validButton);
   };
