@@ -1,4 +1,5 @@
 import React from 'react';
+import { getUser } from '../services/userAPI';
 
 class Header extends React.Component {
   state = {
@@ -7,18 +8,21 @@ class Header extends React.Component {
   };
 
   componentDidMount() {
-    const itemLocalStorage = localStorage.getItem('name');
-    if (itemLocalStorage) {
-      this.setState({
-        name: itemLocalStorage,
-        isLoading: false,
-      });
-    }
-    console.log(itemLocalStorage);
+    this.recoverLocalStorage();
   }
 
+  recoverLocalStorage = async () => {
+    const info = await getUser();
+    console.log(info.name);
+    this.setState({
+      name: info.name,
+      isLoading: false,
+    });
+  };
+
   render() {
-    const { isLoading } = this.state;
+    // console.log(await this.recoverLocalStorage());
+    const { isLoading, name } = this.state;
     if (isLoading) {
       return <h2>Carregando...</h2>;
     }
@@ -27,6 +31,7 @@ class Header extends React.Component {
         Componente Header
         <div data-testid="header-user-name">
           resultado da função
+          { name }
         </div>
       </header>
     );
