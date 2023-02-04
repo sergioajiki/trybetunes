@@ -1,31 +1,31 @@
 .search {
-    background-color:green;
-    display: flex;    
+  background-color: green;
+  display: flex;
 }
 
 .rightSide {
-    background-color:dodgerblue; 
-    align-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
+  align-content: center;
+  align-items: center;
+  background-color: dodgerblue;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
 }
 
 .form {
-    align-items: center;
-    display: flex;
-    height: 100px;
-    padding: 10px;
+  align-items: center;
+  display: flex;
+  height: 100px;
+  padding: 10px;
 }
 
 .results {
-    align-items: center;
-    background-color: orange;
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    justify-content: center;
-    width: 100%;
+  align-items: center;
+  background-color: orange;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: center;
+  width: 100%;
 }

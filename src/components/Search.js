@@ -40,7 +40,7 @@ class Search extends React.Component {
       artistName: '',
 
     });
-    console.log(infoArtist);
+    // console.log(infoArtist);
     return infoArtist;
   };
 
@@ -55,7 +55,7 @@ class Search extends React.Component {
     if (isLoading) {
       return <h2>Carregando...</h2>;
     }
-    console.log(infoArtist.length);
+    // console.log(infoArtist.length);
     return (
       <div data-testid="page-search" className="search">
         <Header />
