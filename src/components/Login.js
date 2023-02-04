@@ -1,5 +1,6 @@
 import React from 'react';
-import '../services/userAPI';
+import PropTypes from 'prop-types';
+import { createUser } from '../services/userAPI';
 
 class Login extends React.Component {
   state = {
@@ -8,32 +9,42 @@ class Login extends React.Component {
     isLogButtonDisabled: true,
   };
 
+  componentDidMount() {
+    console.log('dentro didMount');
+  }
+
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({
       [name]: value,
     }, () => this.validateButtonLogin());
-
-    // const minLength = 3;
-    // const validButton = value.length < minLength;
-    // this.setState({ isLogButtonDisabled: validButton });
-    // console.log(value.length);
   };
 
   validateButtonLogin = () => {
     const { name } = this.state;
-    // console.log(name);
     const minLength = 3;
     const validButton = name.length < minLength;
-    return validButton;
-    // return this.setState({ isLogButtonDisabled: validButton });
-    // console.log(value.length);
-    // console.log(validButton);
+    this.setState({ isLogButtonDisabled: validButton });
+  };
+
+  logUser = async () => {
+    const { name } = this.state;
+    const { history = { push } } = this.props;
+    this.setState({
+      isLoading: true,
+    });
+    await createUser({ name });
+    this.setState({
+      isLoading: false,
+    });
+    history.push('/search');
   };
 
   render() {
-    const { isLogButtonDisabled } = this.state;
-    console.log(isLogButtonDisabled);
+    const { isLogButtonDisabled, name, isLoading } = this.state;
+    if (isLoading) {
+      return <h2>Carregando...</h2>;
+    }
     return (
       <div data-testid="page-login">
         Login
@@ -43,6 +54,7 @@ class Login extends React.Component {
               id="name"
               name="name"
               type="text"
+              value={ name }
               onChange={ this.handleChange }
               data-testid="login-name-input"
             />
@@ -53,7 +65,7 @@ class Login extends React.Component {
             type="button"
             data-testid="login-submit-button"
             disabled={ isLogButtonDisabled }
-            onClick={ this.createUser }
+            onClick={ this.logUser }
             // onClick={ () => console.log('Clicou no botão do login') }
           >
             Entrar
@@ -63,5 +75,11 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default Login;
