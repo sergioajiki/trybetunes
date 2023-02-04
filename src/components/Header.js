@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 
 class Header extends React.Component {
@@ -13,7 +14,7 @@ class Header extends React.Component {
 
   recoverLocalStorage = async () => {
     const info = await getUser();
-    console.log(info.name);
+    // console.log(info.name);
     this.setState({
       name: info.name,
       isLoading: false,
@@ -29,6 +30,25 @@ class Header extends React.Component {
     return (
       <header data-testid="header-component">
         Componente Header
+        <div>Links</div>
+        <Link
+          data-testid="link-to-search"
+          to="/search"
+        >
+          Pesquisar
+        </Link>
+        <Link
+          data-testid="link-to-favorites"
+          to="/favorites"
+        >
+          Favoritos
+        </Link>
+        <Link
+          data-testid="link-to-profile"
+          to="/profile"
+        >
+          Perfil
+        </Link>
         <div data-testid="header-user-name">
           resultado da função
           { name }
