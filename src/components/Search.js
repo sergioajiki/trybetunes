@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Header from './Header';
 import './Search.css';
@@ -86,14 +87,19 @@ class Search extends React.Component {
               }
             </h2>
             <div />
-            <br />
             <div>
               {
                 infoArtist.length === 0
                   ? <h2>Nenhum álbum foi encontrado</h2>
                   : infoArtist.map((info, index) => (
                     <div key={ index }>
-                      {info.collectionName}
+                      <Link
+                        data-testid={ `link-to-album-${info.collectionId}` }
+                        to={ `/album/${info.collectionId}` }
+                      >
+                        {info.collectionName}
+                      </Link>
+
                     </div>
                   ))
               }
