@@ -29,7 +29,7 @@ class Header extends React.Component {
       return <h2>Carregando...</h2>;
     }
     return (
-      <header data-testid="header-component" className='header'>
+      <header data-testid="header-component" className="header">
         Componente Header
         <div>Links</div>
         <Link

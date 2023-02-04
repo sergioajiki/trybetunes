@@ -5,9 +5,11 @@ import './Search.css';
 
 class Search extends React.Component {
   state = {
+    artistName: '',
+    wantedArtist: '',
+    infoArtist: [],
     isLoading: false,
     isLogButtonDisabled: true,
-    artistName: '',
   };
 
   handleChange = ({ target }) => {
@@ -29,20 +31,30 @@ class Search extends React.Component {
     this.setState({
       isLoading: true,
     });
-    const result = await searchAlbumsAPI(artistName);
+    const infoArtist = await searchAlbumsAPI(artistName);
     this.setState({
       isLoading: false,
+      infoArtist,
+      wantedArtist: artistName,
       artistName: '',
+
     });
-    console.log(result);
-    return result;
+    console.log(infoArtist);
+    return infoArtist;
   };
 
   render() {
-    const { isLogButtonDisabled, isLoading, artistName } = this.state;
+    const {
+      isLogButtonDisabled,
+      isLoading,
+      artistName,
+      infoArtist,
+      wantedArtist,
+    } = this.state;
     if (isLoading) {
       return <h2>Carregando...</h2>;
     }
+    console.log(infoArtist.length);
     return (
       <div data-testid="page-search" className="search">
         <Header />
@@ -68,7 +80,21 @@ class Search extends React.Component {
             </button>
           </form>
           <div className="results">
-            Exibir Resultados
+            <h2>
+              {
+                `Resultado de álbuns de: ${wantedArtist}`
+              }
+            </h2>
+            <div />
+            <br />
+            <div>
+              {
+                infoArtist.length === 0
+                  ? <h2>Nenhum álbum foi encontrado</h2>
+                  : <h2>Tem album, pera aí</h2>
+                // ` ${infoArtist}`.length
+              }
+            </div>
           </div>
         </div>
       </div>

@@ -21,8 +21,10 @@
 }
 
 .results {
+    align-items: center;
     background-color: orange;
     display: flex;
+    flex-direction: column;
     height: auto;
     justify-content: center;
     width: 100%;
