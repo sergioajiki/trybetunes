@@ -13,7 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <p>My TrybeTunes</p>
+        <p>My TrybeTunes ta no app</p>
         <Routes />
       </>
     );

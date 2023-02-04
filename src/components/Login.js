@@ -29,7 +29,7 @@ class Login extends React.Component {
 
   logUser = async () => {
     const { name } = this.state;
-    const { history = { push } } = this.props;
+    const { history } = this.props;
     this.setState({
       isLoading: true,
     });

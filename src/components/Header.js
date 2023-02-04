@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
+import './Header.css';
 
 class Header extends React.Component {
   state = {
@@ -28,7 +29,7 @@ class Header extends React.Component {
       return <h2>Carregando...</h2>;
     }
     return (
-      <header data-testid="header-component">
+      <header data-testid="header-component" className='header'>
         Componente Header
         <div>Links</div>
         <Link
@@ -50,7 +51,7 @@ class Header extends React.Component {
           Perfil
         </Link>
         <div data-testid="header-user-name">
-          resultado da função
+          Usuário
           { name }
         </div>
       </header>

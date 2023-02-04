@@ -1,8 +1,11 @@
 import React from 'react';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Header from './Header';
+import './Search.css';
 
 class Search extends React.Component {
   state = {
+    isLoading: false,
     isLogButtonDisabled: true,
     artistName: '',
   };
@@ -21,36 +24,55 @@ class Search extends React.Component {
     this.setState({ isLogButtonDisabled: validButton });
   };
 
+  artistSearch = async () => {
+    const { artistName } = this.state;
+    this.setState({
+      isLoading: true,
+    });
+    const result = await searchAlbumsAPI(artistName);
+    this.setState({
+      isLoading: false,
+      artistName: '',
+    });
+    console.log(result);
+    return result;
+  };
+
   render() {
-    const { isLogButtonDisabled, artistName } = this.state;
-
+    const { isLogButtonDisabled, isLoading, artistName } = this.state;
+    if (isLoading) {
+      return <h2>Carregando...</h2>;
+    }
     return (
-      <div data-testid="page-search">
-        Página do Search
+      <div data-testid="page-search" className="search">
         <Header />
-        <form>
-          <label htmlFor="artistName">
-            <input
-              data-testid="search-artist-input"
-              id="artistName"
-              name="artistName"
-              type="text"
-              value={ artistName }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            data-testid="search-artist-button"
-            type="button"
-            disabled={ isLogButtonDisabled }
-            onClick={ () => console.log('Clicou no botão Procurar ') }
-          >
-            Procurar
-          </button>
-
-        </form>
-
+        <div className="rightSide">
+          <form className="form">
+            <label htmlFor="artistName">
+              <input
+                data-testid="search-artist-input"
+                id="artistName"
+                name="artistName"
+                type="text"
+                value={ artistName }
+                onChange={ this.handleChange }
+              />
+            </label>
+            <button
+              data-testid="search-artist-button"
+              type="button"
+              disabled={ isLogButtonDisabled }
+              onClick={ this.artistSearch }
+            >
+              Procurar
+            </button>
+          </form>
+          <div className="results">
+            Exibir Resultados
+          </div>
+        </div>
       </div>
+
     );
   }
 }
