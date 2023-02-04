@@ -10,7 +10,7 @@ class Login extends React.Component {
   };
 
   componentDidMount() {
-    console.log('dentro didMount');
+    // console.log('dentro didMount');
   }
 
   handleChange = ({ target }) => {
