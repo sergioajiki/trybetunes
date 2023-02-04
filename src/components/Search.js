@@ -91,14 +91,16 @@ class Search extends React.Component {
               {
                 infoArtist.length === 0
                   ? <h2>Nenhum álbum foi encontrado</h2>
-                  : <h2>Tem album, pera aí</h2>
-                // ` ${infoArtist}`.length
+                  : infoArtist.map((info, index) => (
+                    <div key={ index }>
+                      {info.collectionName}
+                    </div>
+                  ))
               }
             </div>
           </div>
         </div>
       </div>
-
     );
   }
 }
