@@ -40,7 +40,7 @@ class Search extends React.Component {
       artistName: '',
 
     });
-    // console.log(infoArtist);
+    console.log(infoArtist);
     return infoArtist;
   };
 
