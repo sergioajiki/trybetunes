@@ -5,8 +5,8 @@ import { createUser } from '../services/userAPI';
 class Login extends React.Component {
   state = {
     isLoading: false,
-    name: '',
     isLogButtonDisabled: true,
+    name: '',
   };
 
   componentDidMount() {
