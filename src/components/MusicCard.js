@@ -1,28 +1,41 @@
 import React from 'react';
 // import Header from './Header';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+
 class MusicCard extends React.Component {
   render() {
-    // const { match: { params: { id } } } = this.props;
-    // console.log({ id });
+    const { albumSongList } = this.props;
     return (
-      <div data-testid="page-profile-edit">
-        Página do MusicCard
+      <div>
+        Lista de musicas
+        {
+          albumSongList.map((song, index) => (
+            <div key={ index }>
+              <p>
+                { song.trackName }
+                <audio data-testid="audio-component" src={ song.previewUrl } controls>
+                  <track kind="captions" />
+                  O seu navegador não suporta o elemento
+                  {' '}
+                  <code>audio</code>
+                  .
+                </audio>
+              </p>
+            </div>
+          ))
+        }
       </div>
     );
   }
 }
 
-// MusicCard.propTypes = {
-//   match: PropTypes.shape({
-//     params: PropTypes.shape({
-//       id: PropTypes.string,
-//     }),
-//   }).isRequired,
-// };
-
-// MusicCard.propTypes = {
-//   match: PropTypes.object.isRequired,
-// };
+MusicCard.propTypes = {
+  albumSongList: PropTypes.arrayOf(
+    PropTypes.shape({
+      trackName: PropTypes.string,
+      previewUrl: PropTypes.string,
+    }),
+  ).isRequired,
+};
 
 export default MusicCard;

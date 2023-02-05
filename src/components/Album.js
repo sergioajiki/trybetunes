@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import getMusics from '../services/musicsAPI';
-// import MusicCard from './MusicCard';
+import MusicCard from './MusicCard';
 
 class Album extends React.Component {
   state = {
@@ -19,14 +19,20 @@ class Album extends React.Component {
     const { match: { params: { id } } } = this.props;
     // console.log({ id });
     const listAlbumMusics = await getMusics(id);
+    const filterOnlyMusic = listAlbumMusics.filter((music) => (
+      music.kind === 'song'
+    ));
     this.setState({
       infoAlbum: listAlbumMusics[0],
       isLoading: false,
+      albumSongList: filterOnlyMusic,
+      // albumSongList: listAlbumMusics,
     });
-    listAlbumMusics.shift();
-    this.setState({
-      albumSongList: listAlbumMusics,
-    });
+
+    // listAlbumMusics.shift();
+    // this.setState({
+    //   ,
+    // });
 
     // console.log(albumSongList);
   };
@@ -65,24 +71,11 @@ class Album extends React.Component {
             { infoAlbum.collectionName}
           </h2>
         </div>
-        Lista de musicas
-        {
-          albumSongList.map((song, index) => (
-            <div key={ index }>
-              <p>
-                { song.trackName }
-                <audio data-testid="audio-component" src={ song.previewUrl } controls>
-                  <track kind="captions" />
-                  O seu navegador não suporta o elemento
-
-                  <code>audio</code>
-                  .
-                </audio>
-              </p>
-            </div>
-          ))
-        }
-        <div />
+        <div>
+          <MusicCard
+            albumSongList={ albumSongList }
+          />
+        </div>
       </div>
     );
   }
