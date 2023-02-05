@@ -8,7 +8,7 @@ class Album extends React.Component {
   state = {
     infoAlbum: '',
     isLoading: true,
-    listAlbumMusics: [],
+    albumSongList: '',
   };
 
   componentDidMount() {
@@ -21,17 +21,27 @@ class Album extends React.Component {
     const listAlbumMusics = await getMusics(id);
     this.setState({
       infoAlbum: listAlbumMusics[0],
-      listAlbumMusics,
       isLoading: false,
     });
-    // console.log(listAlbumMusics);
+    listAlbumMusics.shift();
+    this.setState({
+      albumSongList: listAlbumMusics,
+    });
+
+    // console.log(albumSongList);
   };
 
   render() {
     // const { match: { params: { id } } } = this.props;
-    const { isLoading, listAlbumMusics, infoAlbum } = this.state;
+    const {
+      isLoading,
+      albumSongList,
+      infoAlbum,
+    } = this.state;
     // console.log({ id });
-    console.log(listAlbumMusics);
+    console.log(albumSongList);
+    console.log(infoAlbum);
+    // console.log(teste);
     // console.log(this.getMusicsFromAlbum({ id }));
 
     if (isLoading) {
@@ -40,47 +50,43 @@ class Album extends React.Component {
     return (
       <div data-testid="page-album">
         <Header />
-        {/* <MusicCard /> */}
         Página do Album
         <div>
           <h2
             data-testid="artist-name"
           >
-            nome do artista aqui
+            Artist Name
             { infoAlbum.artistName }
           </h2>
           <h2
             data-testid="album-name"
           >
-            nome do Album aqui
+            Collection Name
             { infoAlbum.collectionName}
           </h2>
         </div>
-
-        {/* {
-          listAlbumMusics.map((music, index) => (
+        Lista de musicas
+        {
+          albumSongList.map((song, index) => (
             <div key={ index }>
-              <h2
-                data-testid="artist-name"
-              >
-                nome do artista aqui
-                { music.artistName }
-              </h2>
-              <h2
-                data-testid="album-name"
-              >
-                nome do Album aqui
-                { music.collectionName}
-              </h2>
+              <p>
+                { song.trackName }
+                <audio data-testid="audio-component" src={ song.previewUrl } controls>
+                  <track kind="captions" />
+                  O seu navegador não suporta o elemento
+
+                  <code>audio</code>
+                  .
+                </audio>
+              </p>
             </div>
           ))
-        } */}
-
+        }
+        <div />
       </div>
     );
   }
 }
-
 Album.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
