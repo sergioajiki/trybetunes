@@ -1,9 +1,9 @@
 .infoArtist {
   align-items: center;
-    background-color: blue;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .albumTitle {
