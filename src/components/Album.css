@@ -1,0 +1,17 @@
+.infoArtist {
+  align-items: center;
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.albumTitle {
+  color: white;
+  font-weight: 700;
+}
+
+.artistTitle {
+  color: white;
+  font-size: small;
+}
