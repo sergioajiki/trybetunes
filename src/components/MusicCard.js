@@ -11,57 +11,88 @@ class MusicCard extends React.Component {
   };
 
   componentDidMount() {
-
+    this.checkIsFavorite();
   }
 
   componentDidUpdate() {
 
   }
 
-  favoriteSong = async (song) => {
-    // console.log(typeof (song));
+  // recoverFavoritesFromLocalStorage = async () => {
+  //   this.setState({
+  //     isLoading: true,
+  //   });
+  //   const favoriteSongs = await getFavoriteSongs();
+  //   this.setState({
+  //     favoritesLocalStorage: favoriteSongs,
+  //     isLoading: false,
+  //   });
+  //   console.log(favoriteSongs);
+  // };
+  checkIsFavorite = async () => {
+    const { song } = this.props;
     this.setState({
       isLoading: true,
-    }, () => this.checkHasSong(song));
-    // const songsOfLocalStorage = await getFavoriteSongs();
-    // const hasSong = songsOfLocalStorage.includes(song);
-    // console.log(hasSong);
-
-    // if (hasSong) {
-    //   await removeSong(song);
-    // } else {
-    //   await addSong(song);
-    // }
-    // console.log(songsOfLocalStorage);
-    // this.setState({
-    //   isLoading: false,
-    // });
-  };
-
-  // hasSong
-  //   ? await removeSong(song)
-  //   : await addSong(song);
-
-  checkHasSong = async (song) => {
-    const songsOfLocalStorage = await getFavoriteSongs();
-    const hasSong = songsOfLocalStorage.includes(song);
-    console.log(hasSong);
-    if (hasSong) {
-      await removeSong(song);
-      this.setState({
-        checked: false,
-      });
-    } else {
-      await addSong(song);
-      this.setState({
-        checked: true,
-      });
-    }
+    });
+    const favoriteSongs = await getFavoriteSongs();
+    const isFavorite = favoriteSongs
+      .some((track) => track.trackId === song.trackId);
+    if (isFavorite) this.setState({ checked: true });
+    console.log(isFavorite);
     this.setState({
       isLoading: false,
     });
-    console.log(songsOfLocalStorage);
+
+    // isFavorite
+    //   ? this.setState({ checked: true })
+    //   : this.setState({ checked: false });
   };
+
+  favoriteSong = async () => {
+    const { song } = this.props;
+    this.setState({
+      isLoading: true,
+    });
+    await addSong(song);
+    // console.log(typeof (song));
+    // console.log(this);
+    this.setState({
+      checked: true,
+      isLoading: false,
+    });
+  };
+
+  // checkHasSong = async (trackId) => {
+  //   const { albumSongList } = this.props;
+  //   const favoriteSong = albumSongList.find((song) => song.trackId === trackId);
+  //   await addSong(favoriteSong);
+  //   this.setState({
+  //     checked: true,
+  //     isLoading: false,
+  //   });
+  // };
+
+  // checkHasSong = async (trackId) => {
+  //   //   const songsOfLocalStorage = await getFavoriteSongs();
+  //   const hasSong = songsOfLocalStorage.includes(song);
+  //   console.log(hasSong);
+  //   if (hasSong) {
+  //     await removeSong(song);
+  //     this.setState({
+  //       checked: false,
+  //     });
+  //   } else {
+  //     await addSong(song);
+  //     this.setState({
+  //       checked: true,
+  //     });
+  //   }
+  //   this.setState({
+  //     isLoading: false,
+  //   });
+  //   console.log(songsOfLocalStorage);
+  // };
+
   // validateCheck = async (song) => {
   //   const songsOfLocalStorage = await getFavoriteSongs();
   //   console.log(typeof (songsOfLocalStorage[0]));
@@ -72,10 +103,27 @@ class MusicCard extends React.Component {
   //   // return checkedValue;
   // };
 
+  // checkHasFavorite = () => {
+  //   const { albumSongList } = this.props;
+  //   const { favoritesLocalStorage } = this.state;
+  //   // const searchFavorite = songsLocalStorage.includes(albumSongList.trackId);
+  //   const searchFavorite = favoritesLocalStorage
+  //     .some((song) => song.id === albumSongList.trackId);
+  //   // searchFavorite ? this.setState({ checked: true }) : this.setState({ checked: false });
+  //   if (searchFavorite) this.setState({ checked: true });
+
+  //   console.log(searchFavorite);
+  //   console.log('Props', albumSongList);
+  //   console.log('state', favoritesLocalStorage);
+  // };
+
   render() {
+    // console.log()
     // console.log(this.validateCheck());
     const { trackName, trackId, previewUrl } = this.props;
     const { isLoading, checked } = this.state;
+    // this.checkHasFavorite();
+
     if (isLoading) {
       return <h2>Carregando...</h2>;
     }
@@ -129,9 +177,11 @@ class MusicCard extends React.Component {
 //   ).isRequired,
 // };
 MusicCard.propTypes = {
+  song: PropTypes.object.isRequired,
   trackName: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   previewUrl: PropTypes.string.isRequired,
+  // albumSongList: PropTypes.array.isRequired,
 };
 
 export default MusicCard;
