@@ -7,7 +7,8 @@ import './MusicCard.css';
 class MusicCard extends React.Component {
   state = {
     isLoading: false,
-    checked: false,
+    // checked: false,
+    isFavorite: false,
   };
 
   componentDidMount() {
@@ -37,10 +38,16 @@ class MusicCard extends React.Component {
     const favoriteSongs = await getFavoriteSongs();
     const isFavorite = favoriteSongs
       .some((track) => track.trackId === song.trackId);
-    if (isFavorite) this.setState({ checked: true });
-    console.log(isFavorite);
+    if (isFavorite) {
+      this.setState({
+        // checked: true,
+        isFavorite: true,
+      });
+    }
+    // console.log(isFavorite);
     this.setState({
       isLoading: false,
+
     });
 
     // isFavorite
@@ -50,16 +57,30 @@ class MusicCard extends React.Component {
 
   favoriteSong = async () => {
     const { song } = this.props;
+    const { isFavorite } = this.state;
+    // const { isFavorite } = this.state;
+    // console.log(isFavorite);
     this.setState({
       isLoading: true,
     });
-    await addSong(song);
+    if (!isFavorite) {
+      await addSong(song);
+      this.setState({
+        // checked: true,
+        isLoading: false,
+        isFavorite: true,
+      });
+    } else {
+      await removeSong(song);
+      this.setState({
+        // checked: false,
+        isLoading: false,
+        isFavorite: false,
+      });
+    }
+
     // console.log(typeof (song));
     // console.log(this);
-    this.setState({
-      checked: true,
-      isLoading: false,
-    });
   };
 
   // checkHasSong = async (trackId) => {
@@ -121,7 +142,7 @@ class MusicCard extends React.Component {
     // console.log()
     // console.log(this.validateCheck());
     const { trackName, trackId, previewUrl } = this.props;
-    const { isLoading, checked } = this.state;
+    const { isLoading, isFavorite } = this.state;
     // this.checkHasFavorite();
 
     if (isLoading) {
@@ -153,7 +174,7 @@ class MusicCard extends React.Component {
                 id={ trackId }
                 // name="favoriteCheck"
                 type="checkbox"
-                checked={ checked }
+                checked={ isFavorite }
                 // comparar o id com o id do localhost para confirmar se checked is true or false
                 // onChange={ () => console.log('Mudou o check') }
                 onChange={ () => this.favoriteSong(trackId) }
@@ -177,7 +198,7 @@ class MusicCard extends React.Component {
 //   ).isRequired,
 // };
 MusicCard.propTypes = {
-  song: PropTypes.object.isRequired,
+  song: PropTypes.shape().isRequired,
   trackName: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   previewUrl: PropTypes.string.isRequired,
