@@ -6,7 +6,6 @@ import MusicCard from './MusicCard';
 class Favorites extends React.Component {
   state = {
     isLoading: false,
-    // isFavorite: true,
     listFavoriteSongs: [],
   };
 
@@ -26,14 +25,14 @@ class Favorites extends React.Component {
     });
   };
 
-  loading = () => {
+  loading = async () => {
     this.setState(
       {
         isLoading: true,
       },
-      () => this.recoverFavoriteFromLocalStorage(),
+      // () => this.recoverFavoriteFromLocalStorage(),
     );
-    this.recoverFavoriteFromLocalStorage();
+    await this.recoverFavoriteFromLocalStorage();
     this.setState({
       isLoading: false,
     });
@@ -60,11 +59,7 @@ class Favorites extends React.Component {
               />
             ))
           }
-          {/* <MusicCard
-            albumSongList={ albumSongList }
-          /> */}
         </div>
-
       </div>
 
     );

@@ -18,7 +18,6 @@ class Album extends React.Component {
 
   getMusicsFromAlbum = async () => {
     const { match: { params: { id } } } = this.props;
-    // console.log({ id });
     const listAlbumMusics = await getMusics(id);
     const filterOnlyMusic = listAlbumMusics.filter((music) => (
       music.kind === 'song'
@@ -27,29 +26,16 @@ class Album extends React.Component {
       infoAlbum: listAlbumMusics[0],
       isLoading: false,
       albumSongList: filterOnlyMusic,
-      // albumSongList: listAlbumMusics,
+
     });
-
-    // listAlbumMusics.shift();
-    // this.setState({
-    //   ,
-    // });
-
-    // console.log(albumSongList);
   };
 
   render() {
-    // const { match: { params: { id } } } = this.props;
     const {
       isLoading,
       albumSongList,
       infoAlbum,
     } = this.state;
-    // console.log({ id });
-    // console.log(albumSongList);
-    // console.log(infoAlbum);
-    // console.log(teste);
-    // console.log(this.getMusicsFromAlbum({ id }));
 
     if (isLoading) {
       return <h2>Carregando...</h2>;
@@ -85,13 +71,9 @@ class Album extends React.Component {
                 trackName={ song.trackName }
                 trackId={ song.trackId }
                 previewUrl={ song.previewUrl }
-                // albumSongList={ albumSongList }
               />
             ))
           }
-          {/* <MusicCard
-            albumSongList={ albumSongList }
-          /> */}
         </div>
       </div>
     );
