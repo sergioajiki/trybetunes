@@ -52,7 +52,8 @@ class Header extends React.Component {
         </Link>
         <div data-testid="header-user-name">
           Usuário
-          { name }
+          <p>{ name }</p>
+          {/* <p>{ name }</p> */}
         </div>
       </header>
     );
