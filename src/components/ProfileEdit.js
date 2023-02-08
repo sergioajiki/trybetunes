@@ -14,47 +14,74 @@ class ProfileEdit extends React.Component {
     this.recoverUserFromLocalStorage();
   }
 
+  onInputChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
   recoverUserFromLocalStorage = async () => {
     const user = await getUser();
     const { name, email, image, description } = user;
+    this.setState({
+      name,
+      email,
+      image,
+      description,
+    });
     console.log(user);
   };
 
+  checkFields = () => {
+    const { name, email, image, description } = this.state;
+    return (
+      name.length === 0
+      || email.length === 0
+      || image.length === 0
+      || description === 0
+    );
+  };
+
   render() {
+    console.log(this.checkFields());
     const { name, email, image, description } = this.state;
     return (
       <div data-testid="page-profile-edit">
         <Header />
         Página do ProfileEdit
         <form>
-          <label htmlFor="name">
+          <label htmlFor="nameId">
             Nome:
             <input
               data-testid="edit-input-name"
               type="text"
-              id="name"
+              id="nameId"
               value={ name }
-              onChange={ () => console.log('clicou no nome') }
+              name="name"
+              onChange={ this.onInputChange }
             />
           </label>
-          <label htmlFor="email">
+          <label htmlFor="emailId">
             Email:
             <input
               data-testid="edit-input-email"
               type="email"
-              id="email"
+              id="emailId"
               value={ email }
-              onChange={ () => console.log('clicou no email') }
+              name="email"
+              onChange={ this.onInputChange }
             />
           </label>
-          <label htmlFor="description">
+          <label htmlFor="descriptionId">
             Descrição:
             <input
               data-testid="edit-input-description"
               type="text"
-              id="description"
+              id="descriptionId"
               value={ description }
-              onChange={ () => console.log('clicou na descrição') }
+              name="description"
+              onChange={ this.onInputChange }
             />
           </label>
           <label htmlFor="image">
@@ -64,11 +91,14 @@ class ProfileEdit extends React.Component {
               type="text"
               id="image"
               value={ image }
-              onChange={ () => console.log('clicou na imagem') }
+              name="image"
+              onChange={ this.onInputChange }
             />
           </label>
           <button
             data-testid="edit-button-save"
+            type="button"
+            disabled={ this.checkFields() }
           >
             Salvar
           </button>
