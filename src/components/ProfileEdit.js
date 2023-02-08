@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUser } from '../services/userAPI';
+import { getUser, updateUser } from '../services/userAPI';
 import Header from './Header';
 
 class ProfileEdit extends React.Component {
@@ -8,6 +8,7 @@ class ProfileEdit extends React.Component {
     email: '',
     image: '',
     description: '',
+    isLoading: false,
   };
 
   componentDidMount() {
@@ -29,6 +30,7 @@ class ProfileEdit extends React.Component {
       email,
       image,
       description,
+      isLoading: false,
     });
     console.log(user);
   };
@@ -43,9 +45,29 @@ class ProfileEdit extends React.Component {
     );
   };
 
+  uptadeUserInfo = async () => {
+    this.setState({
+      isLoading: true,
+    });
+    const { name, email, image, description } = this.state;
+    const updatedInfo = {
+      name,
+      email,
+      image,
+      description,
+    };
+    await updateUser(updatedInfo);
+    this.setState({
+      isLoading: false,
+    });
+  };
+
   render() {
     console.log(this.checkFields());
-    const { name, email, image, description } = this.state;
+    const { name, email, image, description, isLoading } = this.state;
+    if (isLoading) {
+      return <h2>Carregando...</h2>;
+    }
     return (
       <div data-testid="page-profile-edit">
         <Header />
@@ -99,6 +121,7 @@ class ProfileEdit extends React.Component {
             data-testid="edit-button-save"
             type="button"
             disabled={ this.checkFields() }
+            onClick={ this.uptadeUserInfo }
           >
             Salvar
           </button>
