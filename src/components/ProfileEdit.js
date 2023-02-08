@@ -1,4 +1,5 @@
 import React from 'react';
+import Proptypes from 'prop-types';
 import { getUser, updateUser } from '../services/userAPI';
 import Header from './Header';
 
@@ -50,6 +51,7 @@ class ProfileEdit extends React.Component {
       isLoading: true,
     });
     const { name, email, image, description } = this.state;
+    const { history } = this.props;
     const updatedInfo = {
       name,
       email,
@@ -60,6 +62,7 @@ class ProfileEdit extends React.Component {
     this.setState({
       isLoading: false,
     });
+    history.push('../profile');
   };
 
   render() {
@@ -133,4 +136,9 @@ class ProfileEdit extends React.Component {
   }
 }
 
+ProfileEdit.propTypes = {
+  history: Proptypes.shape({
+    push: Proptypes.func,
+  }).isRequired,
+};
 export default ProfileEdit;
