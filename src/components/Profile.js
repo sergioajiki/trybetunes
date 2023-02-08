@@ -27,9 +27,6 @@ class Profile extends React.Component {
   };
 
   recoverUserFromLocalStorage = async () => {
-    // this.setState({
-    //   isLoading: true,
-    // });
     const user = await getUser();
     console.log(user);
     const { name, email, image, description } = user;
