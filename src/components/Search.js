@@ -57,7 +57,10 @@ class Search extends React.Component {
     }
     // console.log(infoArtist.length);
     return (
-      <div data-testid="page-search" className="search">
+      <div
+        data-testid="page-search"
+        className="search"
+      >
         <Header />
         <div className="rightSide">
           <form className="form">

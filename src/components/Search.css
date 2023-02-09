@@ -1,6 +1,8 @@
 .search {
   background-color: green;
   display: flex;
+  height: 100vh;
+  width: 100vh;
 }
 
 .rightSide {
@@ -9,7 +11,7 @@
   background-color: dodgerblue;
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 100%;
   width: 100%;
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
+import './Login.css';
 
 class Login extends React.Component {
   state = {
@@ -46,31 +47,42 @@ class Login extends React.Component {
       return <h2>Carregando...</h2>;
     }
     return (
-      <div data-testid="page-login">
-        Login
-        <form>
-          <label htmlFor="name">
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={ name }
-              onChange={ this.handleChange }
-              data-testid="login-name-input"
-            />
-          </label>
-          <br />
+      <div className="loginComponent">
+        <div
+          data-testid="page-login"
+          className="loginForm"
+        >
 
-          <button
-            type="button"
-            data-testid="login-submit-button"
-            disabled={ isLogButtonDisabled }
-            onClick={ this.logUser }
-            // onClick={ () => console.log('Clicou no botão do login') }
-          >
-            Entrar
-          </button>
-        </form>
+          <form className="formLogin">
+            <span className="title">
+              trybe
+              <br />
+              tunes
+            </span>
+
+            <label htmlFor="name">
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={ name }
+                onChange={ this.handleChange }
+                data-testid="login-name-input"
+                placeholder="qual é o seu nome?"
+                className="input"
+              />
+            </label>
+            <button
+              data-testid="login-submit-button"
+              type="button"
+              disabled={ isLogButtonDisabled }
+              onClick={ this.logUser }
+              className="buttonLogin"
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

@@ -8,14 +8,15 @@ import React from 'react';
 // import ProfileEdit from './components/ProfileEdit';
 // import Search from './components/Search';
 import Routes from './components/Routes';
+import './App.css';
 
 class App extends React.Component {
   render() {
     return (
-      <>
-        <p>My TrybeTunes ta no app</p>
+      <div>
+        {/* <p>My TrybeTunes ta no app</p> */}
         <Routes />
-      </>
+      </div>
     );
   }
 }
