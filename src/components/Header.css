@@ -1,5 +1,26 @@
 .header {
-  background-color: darkcyan;
+  background-color: white;
   display: flex;
   flex-direction: column;  
+  height: 100%;
+  width: 250px;
+  justify-content: space-between;
 }
+
+.links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px;
+  height: 150px;
+}
+
+.title{
+  display: flex;
+  align-self: center;
+  font-size: 50px;
+  font-style: italic;
+  font-weight: 700;
+  margin-top: 30px;
+}
+

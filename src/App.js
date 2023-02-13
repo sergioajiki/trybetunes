@@ -13,7 +13,7 @@ import './App.css';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="divApp">
         {/* <p>My TrybeTunes ta no app</p> */}
         <Routes />
       </div>

@@ -1,28 +1,35 @@
 .search {
-  background-color: green;
+  /* background-color: green; */
   display: flex;
-  height: 100vh;
-  width: 100vh;
+  height: 100;
+  
 }
 
-.rightSide {
+/* .rightSide {
   align-content: center;
   align-items: center;
-  background-color: dodgerblue;
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
+  box-sizing: border-box;
+} */
+
+.listSongs {
+height: 70%;
+display: flex;
+flex-direction: column;
 }
 
-.form {
+/* .form {
   align-items: center;
   display: flex;
-  height: 100px;
+  height: 200px;
   padding: 10px;
-}
+  
+} */
 
-.results {
+/* .results {
   align-items: center;
   background-color: orange;
   display: flex;
@@ -30,4 +37,5 @@
   height: auto;
   justify-content: center;
   width: 100%;
-}
+  height: 100vh;
+} */

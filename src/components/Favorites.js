@@ -2,6 +2,7 @@ import React from 'react';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Header from './Header';
 import MusicCard from './MusicCard';
+import './Favorites.css';
 
 class Favorites extends React.Component {
   state = {
@@ -44,10 +45,14 @@ class Favorites extends React.Component {
       return <h2>Carregando...</h2>;
     }
     return (
-      <div data-testid="page-favorites">
+      <div
+        data-testid="page-favorites"
+
+      >
         <Header />
         Página dos Favoritos
-        <div>
+
+        <div className="rightSide">
           {
             listFavoriteSongs.map((song) => (
               <MusicCard

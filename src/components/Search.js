@@ -72,6 +72,7 @@ class Search extends React.Component {
                 type="text"
                 value={ artistName }
                 onChange={ this.handleChange }
+                className="inputArtistOrBand"
               />
             </label>
             <button
@@ -79,6 +80,7 @@ class Search extends React.Component {
               type="button"
               disabled={ isLogButtonDisabled }
               onClick={ this.artistSearch }
+              className="buttonProcurar"
             >
               Procurar
             </button>
@@ -90,7 +92,7 @@ class Search extends React.Component {
               }
             </h2>
             <div />
-            <div>
+            <div className="listSongs">
               {
                 infoArtist.length === 0
                   ? <h2>Nenhum álbum foi encontrado</h2>
@@ -102,7 +104,6 @@ class Search extends React.Component {
                       >
                         {info.collectionName}
                       </Link>
-
                     </div>
                   ))
               }

@@ -4,8 +4,15 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vh;
+  width: 100%;
   justify-content: center;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
 .loginComponent {
@@ -15,6 +22,21 @@ body {
   height: 100%;
   justify-content: center;
   width: 100%;
+}
+
+.inputArtistOrBand {
+  border-radius: 25px;
+  height: 40px;
+  width: 400px;
+}
+
+.buttonProcurar {
+  background-color: aqua;
+  border-color: aqua;
+  border-radius: 25px;
+  font-size: 14px;
+  height: 40px;
+  width: 100px;
 }
 
 .formLogin {
@@ -28,12 +50,6 @@ body {
   width: 750px;
 }
 
-.title {
-  font-size: 50px;
-  font-style: italic;
-  font-weight: 700;
-  margin-bottom: 50px;
-}
 
 .input {
   border-color: blue;

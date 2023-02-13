@@ -1,0 +1,43 @@
+.divApp {
+    height: 100vh;
+    width: 100%;
+}
+
+.search {
+    /* background-color: green; */
+    display: flex;
+    height: 100vh;
+  
+  }
+  
+  .rightSide {
+    align-content: center;
+    align-items: center;
+    /* background-color: dodgerblue; */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .form {
+    align-items: center;
+    display: flex;
+    height: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .results {
+    align-items: center;
+    background-color: orange;
+    display: flex;
+    flex-direction: column;
+    /* height: auto; */
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    word-wrap: break-word;
+  }
+
+  

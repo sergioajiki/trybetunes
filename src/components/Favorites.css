@@ -1,0 +1,15 @@
+.rightSide {
+    align-content: center;
+    align-items: center;
+    /* background-color: dodgerblue; */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.divApp {
+    height: 100vh;
+    width: 100%;
+}
+
